@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Egér fény
+    // 2. Egér fény követés
     window.addEventListener('mousemove', (e) => {
         if (glow) {
             gsap.to(glow, {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Nyelvváltó
+    // 3. Nyelvváltó logika
     let currentLang = 'hu';
     langBtn.addEventListener('click', () => {
         currentLang = currentLang === 'hu' ? 'en' : 'hu';
@@ -50,46 +50,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Téma váltó
+    // 4. Téma váltó (DarkMode / LightMode)
     themeBtn.addEventListener('click', () => {
         body.classList.toggle('light-mode');
-        themeIcon.className = body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        
+        // Ikon csere és kis animáció
+        if (body.classList.contains('light-mode')) {
+            themeIcon.className = 'fas fa-sun';
+            gsap.to(themeBtn, { rotation: 180, duration: 0.5 });
+        } else {
+            themeIcon.className = 'fas fa-moon';
+            gsap.to(themeBtn, { rotation: 0, duration: 0.5 });
+        }
     });
 
-    // 5. Smooth scroll
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    // 5. Smooth scroll minden linkhez
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 window.scrollTo({
-                    top: target.offsetTop - 100,
+                    top: target.offsetTop - 120,
                     behavior: 'smooth'
                 });
             }
         });
     });
+});
+// Hamburger menü kezelése
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
 
-    // 6. HAMBURGER MENÜ — IDE KELL TENNI!
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
+if (menuToggle) {
     menuToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
-
+        
+        // Opcionális: Ikon váltása Bars-ról X-re
         const icon = menuToggle.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        if (navMenu.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
     });
+}
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-
-            const icon = menuToggle.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
-        });
+// Menü bezárása, ha rákattintunk egy linkre
+document.querySelectorAll('#nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        if(icon) icon.classList.replace('fa-times', 'fa-bars');
     });
-
 });
+

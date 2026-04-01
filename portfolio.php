@@ -11,30 +11,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-
+    <style>
+        html { scroll-behavior: smooth; } /* Finom görgetés */
+    </style>
 </head>
-<body id="page-body">
+<body id="page-body" class="bg-[#030303] text-white">
+
     <div id="glow" class="cursor-glow"></div>
 
-  <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl backdrop-blur-xl rounded-full px-6 py-3 flex justify-between items-center shadow-2xl transition-all border border-white/10">
-    <div class="text-xl font-black tracking-tighter italic">RK<span class="text-indigo-500">.</span></div>
-    
-    <div class="flex gap-4 md:gap-6 text-sm font-medium items-center">
-        <a href="#home" class="hover:text-indigo-500 transition lang" data-hu="Kezdőlap" data-en="Home">Kezdőlap</a>
-        <a href="#projects" class="hover:text-indigo-500 transition lang" data-hu="Projektek" data-en="Projects">Projektek</a>
-        <a href="#education" class="hover:text-indigo-500 transition lang" data-hu="Tanulmányok" data-en="Education">Tanulmányok</a>
-        <a href="#contact" class="hover:text-indigo-500 transition lang" data-hu="Kapcsolat" data-en="Contact">Kapcsolat</a>
-        
-        <div class="h-4 w-[1px] bg-gray-500/30 hidden sm:block"></div>
-        
-        <div class="flex gap-4 items-center">
-            <button id="lang-btn" class="font-bold text-indigo-500 hover:scale-110 transition">EN</button>
-            <button id="theme-toggle" class="text-lg hover:rotate-12 transition transform">
-                <i id="theme-icon" class="fas fa-moon"></i>
-            </button>
-        </div>
+    <div class="fixed bottom-8 right-8 z-[100] flex flex-col gap-4">
+        <button id="lang-btn" class="w-14 h-14 rounded-xl flex items-center justify-center text-sm uppercase tracking-widest border border-white/20 shadow-2xl">
+            EN
+        </button>
+        <button id="theme-toggle" class="w-14 h-14 rounded-xl flex items-center justify-center text-xl border border-white/20 shadow-2xl">
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
     </div>
-</nav>
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-2xl">
+        <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl px-6 py-3 flex items-center justify-between relative">
+            <div class="text-xl font-black tracking-tighter italic">KR<span class="text-indigo-500">.</span></div>
+
+            <button id="menu-toggle" class="text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div id="nav-menu" class="nav-links flex gap-6">
+                <a href="#home" class="hover:text-indigo-400 transition lang" data-hu="Kezdőlap" data-en="Home">Kezdőlap</a>
+                <a href="#education" class="hover:text-indigo-400 transition lang" data-hu="Tanulmányok" data-en="Education">Tanulmányok</a>
+                <a href="#projects" class="hover:text-indigo-400 transition lang" data-hu="Projektek" data-en="Projects">Projektek</a>
+                <a href="#contact" class="hover:text-indigo-400 transition lang" data-hu="Kapcsolat" data-en="Contact">Kapcsolat</a>
+            </div>
+        </div>
+    </nav>
 
     <main class="container mx-auto px-6 pt-32 pb-20">
         
@@ -63,15 +72,15 @@
                 <p class="text-[10px] opacity-40 mt-1 uppercase tracking-widest font-bold text-indigo-400">C#, Java, PHP, React, MySQL</p>
             </div>
 
-            <div class="bento-card p-6 flex items-center justify-around text-2xl">
+            <div  id="contact" class="bento-card p-6 flex items-center justify-around text-2xl">
                 <a href="https://github.com/kajdonromuald" target="_blank" class="hover:text-indigo-500 transition-all hover:scale-125"><i class="fab fa-github"></i></a>
                 <a href="mailto:kajdon.r@gmail.com" class="hover:text-indigo-500 transition-all hover:scale-125"><i class="fas fa-envelope"></i></a>
                 <a href="https://www.linkedin.com/in/kajdon-romuald-115193351/" target="_blank" class="hover:text-indigo-500 transition-all hover:scale-125"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
 
-        <h2 class="text-2xl font-bold mb-6 ml-4 opacity-50 uppercase tracking-widest lang" data-hu="Kiemelt Projektek" data-en="Featured Projects">Kiemelt Projektek</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" id="projects">
+        <h2 id="projects" class="text-2xl font-bold mb-6 ml-4 opacity-50 uppercase tracking-widest lang" data-hu="Kiemelt Projektek" data-en="Featured Projects">Kiemelt Projektek</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div class="md:col-span-1 bento-card p-8 flex flex-col justify-between h-[400px] relative overflow-hidden group">
                 <div class="z-10">
                     <h3 class="text-2xl font-bold mb-2">SmartCodeGen AI</h3>
@@ -109,9 +118,9 @@
             </div>
         </div>
 
-        <h2 class="text-2xl font-bold mb-6 ml-4 opacity-50 uppercase tracking-widest lang" data-hu="Tanulmányok & Készségek" data-en="Education & Skills">Tanulmányok & Készségek</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" id="education">
-            <div class="md:col-span-2 bento-card p-8 flex flex-col justify-center h-[400px] bg-gradient-to-br from-indigo-500/10 to-transparent">
+        <h2 id="education" class="text-2xl font-bold mb-6 ml-4 opacity-50 uppercase tracking-widest lang" data-hu="Tanulmányok & Készségek" data-en="Education & Skills" >Tanulmányok & Készségek</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="md:col-span-2 bento-card p-8 flex flex-col justify-center min-h-[350px] bg-gradient-to-br from-indigo-500/10 to-transparent">
                 <div class="space-y-8">
                     <div class="border-l-2 border-indigo-500 pl-6">
                         <p class="text-indigo-500 font-bold text-sm">2022 — 2026</p>
@@ -131,7 +140,7 @@
                 <div class="space-y-6">
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="lang" data-hu="Angol" data-en="English">Angol</span>
+                            <span class="lang" data-hu="Német" data-en="German">Német</span>
                             <span class="text-indigo-400 font-bold">B2 / Professional</span>
                         </div>
                         <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
@@ -140,7 +149,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="lang" data-hu="Német" data-en="German">Német</span>
+                            <span class="lang" data-hu="Angol" data-en="English">Angol</span>
                             <span class="text-gray-400">A2 / Basic</span>
                         </div>
                         <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
@@ -151,7 +160,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="contact">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="md:col-span-1 bento-card p-8 flex flex-col justify-center">
                  <h3 class="text-2xl font-bold mb-4 lang" data-hu="Szakmai Projektek" data-en="Professional Projects">Szakmai Projektek</h3>
                  <ul class="space-y-3 opacity-70 text-sm">
@@ -172,7 +181,6 @@
             </div>
         </div>
     </main>
-</body>
 
     <script src="js/script.js"></script>
 </body>
