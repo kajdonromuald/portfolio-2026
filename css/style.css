@@ -1,0 +1,98 @@
+/* --- ALAPVETŐ VÁLTOZÓK --- */
+:root {
+    --bg-color: #030303;
+    --text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --accent: #6366f1;
+    --nav-bg: rgba(3, 3, 3, 0.85);
+}
+
+body.light-mode {
+    --bg-color: #e2e8f0; 
+    --text-color: #1e293b; 
+    --card-bg: rgba(255, 255, 255, 0.7); 
+    --card-border: rgba(99, 102, 241, 0.2); 
+    --nav-bg: rgba(226, 232, 240, 0.95);
+}
+
+body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    font-family: 'Outfit', sans-serif;
+    transition: background-color 0.5s ease;
+    overflow-x: hidden;
+}
+
+/* --- FUNKCIÓ GOMBOK (Letisztult, csak lila szöveg/ikon) --- */
+#lang-btn, #theme-toggle, #menu-toggle {
+    background: transparent !important;
+    border: none !important;
+    color: var(--accent) !important;
+    cursor: pointer;
+    font-weight: 900;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lang-btn:hover, #theme-toggle:hover {
+    transform: scale(1.2);
+}
+
+/* --- RESPONZÍV NAVBAR --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 90px;
+        left: 50%;
+        /* A transform-nál fontos, hogy a JS-es megjelenítésnél is ott legyen a -50% */
+        transform: translateX(-50%) translateY(-20px);
+        width: 90%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        flex-direction: column;
+        display: none; /* KIVETTEM AZ !IMPORTANT-OT, hogy a JS tudja kezelni */
+        opacity: 0;
+        z-index: 100;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Amikor az 'active' osztályt megkapja a JS-től */
+    .nav-links.active {
+        display: flex !important;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-links a {
+        font-size: 1.2rem !important;
+        padding: 12px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* --- BENTO KÁRTYÁK --- */
+.bento-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--card-border) !important;
+    backdrop-filter: blur(15px);
+    border-radius: 2rem;
+    transition: transform 0.4s ease;
+}
+
+/* Egér fény */
+.cursor-glow {
+    position: fixed;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
